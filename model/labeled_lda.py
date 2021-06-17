@@ -64,6 +64,15 @@ class LldaModel:
     @field Lambda: a matrix, shape is M * K,
                    Lambda[m][k] is 1 means topic k is a label of document m
 
+
+每一行代表一篇文档：
+K=4
+Lambda[d]=[0,1,1,0] T
+alpha_verctor = [0.001,0.001,0.001,0.001]
+
+alpha_verctor * Lambda[d] = 
+
+
     # derivative fields
     @field Doc2TopicCount: a matrix, shape is M * K,
                            Doc2TopicCount[m][k] is the times of topic k sampled in document m
@@ -72,9 +81,17 @@ class LldaModel:
     @field Doc2TopicCountSum: a vector, shape is M, self.Doc2TopicCount.sum(axis=1)
                               Doc2TopicCountSum[m] is the count of all topic,
                               i.e., Doc2TopicCountSum[m] is the number of words in document m
+                           
     @field alpha_vector_Lambda: a matrix, self.alpha_vector * self.Lambda
+    alpha_vector: K*M
+    Lambda : M * K
+   alpha_vector_Lambda = self.alpha_vector * self.Lambda : 1*K
+    
     @field alpha_vector_Lambda_sum: a vector, self.alpha_vector_Lambda.sum(axis=1)
+    
     @field eta_vector_sum: float value, sum(self.eta_vector)
+    eta: 1*M
+    
     @field Topic2TermCountSum: a vector, self.Topic2TermCount.sum(axis=1)
 
     """
